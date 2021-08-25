@@ -2,12 +2,27 @@
 
 const submitbtn = document.getElementById("submit");
 
+function telephoneCheck(str) {
+  var a = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(str);
+  return a;
+}
+
+function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+    alert("You have entered an invalid email address!")
+    return (false)
+}
+
 submitbtn.addEventListener("click", async (e) => {
   let fname = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let subject = document.getElementById("subject").value;
   let message = document.getElementById("message").value;
-  if (fname.length > 5 && email.length > 10 && subject.length >= 10) {
+  if (fname.length > 4 && email.length > 6 && subject.length === 10 && telephoneCheck(subject)&& ValidateEmail(email)) {
     const rawResponse = await fetch(
       "https://lit-atoll-32207.herokuapp.com/api/v1/flames",
       {
@@ -44,7 +59,7 @@ msubmitbtn.addEventListener("click", async (e) => {
   let email = document.getElementById("memail").value;
   let subject = document.getElementById("msubject").value;
   let message = document.getElementById("mmessage").value;
-  if (fname.length > 5 && email.length > 10 && subject.length >= 10) {
+  if (fname.length > 4 && email.length > 6 && subject.length === 10 && telephoneCheck(subject) && ValidateEmail(email)) {
     const rawResponse = await fetch(
       "https://lit-atoll-32207.herokuapp.com/api/v1/flames",
       {
